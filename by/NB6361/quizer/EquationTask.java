@@ -3,12 +3,8 @@ package by.NB6361.quizer;
 import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 public class EquationTask extends AbstractMathTask {
     EquationTask(String test, String answer) {
@@ -31,11 +27,9 @@ public class EquationTask extends AbstractMathTask {
             return new EquationTask(a + operation.getCharacter() + "x=" + b, String.valueOf(ans));
         }
 
-        private EquationTask  generateReal() {
-            double a = ThreadLocalRandom.current().nextDouble(maxNumber - minNumber + 1) + minNumber;
-            double b = ThreadLocalRandom.current().nextDouble(maxNumber - minNumber + 1) + minNumber;
-            List<Operations> operationsList = operations.stream().collect(Collectors.toList());
-            Operations operation = operationsList.get(ThreadLocalRandom.current().nextInt(operationsList.size()));
+        private EquationTask generateReal() {
+            double a = this.a.doubleValue();
+            double b = this.b.doubleValue();
             if (operation == Operations.SUM) {
                 return toReturn(a, b, b - a, Operations.SUM);
             } else if (operation == Operations.DIFFERENCE) {
@@ -60,10 +54,8 @@ public class EquationTask extends AbstractMathTask {
         }
 
         private EquationTask generateInteger() {
-            int a = (ThreadLocalRandom.current().nextInt((int) (maxNumber - minNumber + 1)) + (int) minNumber);;
-            int b = (ThreadLocalRandom.current().nextInt((int) (maxNumber - minNumber + 1)) + (int) minNumber);
-            List<Operations> operationsList = operations.stream().collect(Collectors.toList());
-            Operations operation = operationsList.get(ThreadLocalRandom.current().nextInt(operationsList.size()));
+            int a = this.a.intValue();
+            int b = this.b.intValue();
             if (operation == Operations.SUM) {
                 return new EquationTask(a + "+x=" + b, String.valueOf(b - a));
             } else if (operation == Operations.DIFFERENCE) {
@@ -94,10 +86,10 @@ public class EquationTask extends AbstractMathTask {
                 }
                 b = divisors.get(ThreadLocalRandom.current().nextInt(divisors.size()));
                 if (operation == Operations.DIVISION) {
-                    return new EquationTask(String.valueOf(a) + "/x=" + b,
+                    return new EquationTask(a + "/x=" + b,
                             String.valueOf(a / b));
                 } else {
-                    return new EquationTask(String.valueOf(b) + "*x=" + a,
+                    return new EquationTask(b + "*x=" + a,
                             String.valueOf(a / b));
                 }
             }

@@ -32,10 +32,8 @@ public class ExpressionTask extends AbstractMathTask {
         }
 
         private ExpressionTask  generateReal() {
-            double a = ThreadLocalRandom.current().nextDouble(maxNumber - minNumber + 1) + minNumber;
-            double b = ThreadLocalRandom.current().nextDouble(maxNumber - minNumber + 1) + minNumber;
-            List<Operations> operationsList = operations.stream().collect(Collectors.toList());
-            Operations operation = operationsList.get(ThreadLocalRandom.current().nextInt(operationsList.size()));
+            double a = this.a.doubleValue();
+            double b = this.b.doubleValue();
             if (operation == Operations.SUM) {
                 toReturn(a, b, a + b, Operations.SUM);
             } else if (operation == Operations.DIFFERENCE) {
@@ -60,10 +58,8 @@ public class ExpressionTask extends AbstractMathTask {
         }
 
         private ExpressionTask generateInteger() {
-            int a = (ThreadLocalRandom.current().nextInt((int) (maxNumber - minNumber + 1)) + (int) minNumber);;
-            int b = (ThreadLocalRandom.current().nextInt((int) (maxNumber - minNumber + 1)) + (int) minNumber);
-            List<Operations> operationsList = operations.stream().collect(Collectors.toList());
-            Operations operation = operationsList.get(ThreadLocalRandom.current().nextInt(operationsList.size()));
+            int a = this.a.intValue();
+            int b = this.b.intValue();
             if (operation == Operations.SUM) {
                 return new ExpressionTask(a + "+" + b + "=?", String.valueOf(b + a));
             } else if (operation == Operations.DIFFERENCE) {
@@ -96,7 +92,7 @@ public class ExpressionTask extends AbstractMathTask {
                     divisor++;
                 }
                 b = divisors.get(ThreadLocalRandom.current().nextInt(divisors.size()));
-                return new ExpressionTask(String.valueOf(a) + "/" + b + "=?",
+                return new ExpressionTask(a + "/" + b + "=?",
                         String.valueOf(a / b));
             }
         }

@@ -12,11 +12,10 @@ public class Main {
         GroupTaskGenerator group = new GroupTaskGenerator(
                 (Task.Generator) new ExpressionTask.Generator(0, 100, opers, 1),
                 (Task.Generator) new EquationTask.Generator(0, 100, opers, 1));
-        mapOfQuizes.putIfAbsent("Math", new Quiz(group, 10));
+        mapOfQuizes.putIfAbsent("Math", new Quiz(group, 2));
         PoolTaskGenerator pool = new PoolTaskGenerator(false, new TextTask(), new TextTask(),
                 new TextTask(), new TextTask(), new TextTask());
         mapOfQuizes.putIfAbsent("Text", new Quiz((Task.Generator) pool, 5));
-
         return mapOfQuizes;
     }
 

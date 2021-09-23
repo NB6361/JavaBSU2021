@@ -12,14 +12,13 @@ public class GroupTaskGenerator implements Task.Generator {
     }
 
     public GroupTaskGenerator(List<Task.Generator> generators) {
-        this.generators = (ArrayList<Task.Generator>) generators;
+        this.generators = generators;
     }
 
     @Override
     public Task generate() {
-        assert generators != null;
         return generators.get((ThreadLocalRandom.current().nextInt(generators.size()))).generate();
     }
 
-    private ArrayList<Task.Generator> generators;
+    private List<Task.Generator> generators;
 }

@@ -2,6 +2,8 @@ package by.NB6361.quizer;
 
 import java.util.EnumSet;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class AbstractMathTask implements MathTask {
     static abstract class Generator implements MathTask.Generator {
@@ -10,6 +12,22 @@ public abstract class AbstractMathTask implements MathTask {
             this.minNumber = minNumber;
             this.precision = precision;
             this.operations = operations;
+
+            if (precision == 0) {
+                a = (ThreadLocalRandom.current().nextInt((int) (maxNumber - minNumber + 1)) + (int) minNumber);
+                b = (ThreadLocalRandom.current().nextInt((int) (maxNumber - minNumber + 1)) + (int) minNumber);
+            } else {
+                a = ThreadLocalRandom.current().nextDouble(maxNumber - minNumber + 1) + minNumber;
+                b = ThreadLocalRandom.current().nextDouble(maxNumber - minNumber + 1) + minNumber;
+            }
+            Optional<Operations> rawOperation = operations
+                    .stream()
+                    .skip(ThreadLocalRandom.current().nextInt(operations.size()))
+                    .findFirst();
+            if (rawOperation.isEmpty()) {
+                throw new IllegalArgumentException();
+            }
+            operation = rawOperation.get();
         }
 
         public double getMinNumber() {
@@ -24,6 +42,9 @@ public abstract class AbstractMathTask implements MathTask {
         protected double minNumber;
         protected double maxNumber;
         protected int precision;
+        protected Number a;
+        protected Number b;
+        protected Operations operation;
     }
 
     AbstractMathTask(String test, String answer) {

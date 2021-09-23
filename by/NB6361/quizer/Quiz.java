@@ -6,9 +6,6 @@ import java.util.ArrayList;
 public class Quiz {
     public Quiz(Task.Generator generator, int taskCount) {
         tasks = new ArrayList<>();
-        if (generator == null) {
-            throw new IllegalArgumentException();
-        }
         for (int i = 0; i < taskCount; ++i) {
             tasks.add(generator.generate());
         }
