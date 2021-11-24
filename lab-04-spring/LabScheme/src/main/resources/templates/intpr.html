@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul>
+    <li th:each="program: ${programs}"
+        th:text="|${program.code} => ${program.result}|"></li>
+</ul>
+
+
+<form action="/" method="POST">
+    <label>
+        Your code:
+        <textarea th:text="${code}" name="code" rows="10" cols="200"></textarea>
+    </label>
+    <p th:text="${result}">
+    </p>
+    <br>
+    <input type="submit" />
+</form>
+
+</body>
+</html>
